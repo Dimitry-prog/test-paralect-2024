@@ -53,7 +53,7 @@ export const myTheme = createTheme({
     ],
     purple: [
       '#541F9D',
-      '#F2ECFA',
+      '#F2EBF9',
       '#E5D5FA',
       '#D1B4F8',
       '#BD93F7',
@@ -97,5 +97,17 @@ export const myTheme = createTheme({
     md: rem(16),
     lg: rem(18),
     xl: rem(20),
+  },
+  components: {
+    NavLinks: {
+      defaultProps: {
+        '&:hover': {
+          backgroundColor: 'red',
+        },
+        '.mantine-NavLink-root': {
+          backgroundColor: 'red',
+        },
+      },
+    },
   },
 });
