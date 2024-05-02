@@ -1,6 +1,6 @@
 'use client';
 
-import { AppShell, Burger, Group, Stack } from '@mantine/core';
+import { AppShell, Box, Burger, Group, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { ReactNode } from 'react';
 
@@ -21,7 +21,7 @@ const CustomLayout = ({ children }: { children: ReactNode }) => {
       padding="md"
       withBorder={false}
     >
-      <AppShell.Header>
+      <AppShell.Header bg="purple.1">
         <Group p="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Logo />
@@ -29,11 +29,20 @@ const CustomLayout = ({ children }: { children: ReactNode }) => {
       </AppShell.Header>
       <AppShell.Navbar p="24" bg="purple.1">
         <Stack gap="80">
-          <Logo />
+          <Box hiddenFrom="xs">
+            <Logo />
+          </Box>
+          <Box visibleFrom="sm">
+            <Logo />
+          </Box>
           <NavMenu />
         </Stack>
       </AppShell.Navbar>
-      <AppShell.Main bg="gray.1" pl="370" pt="40">
+      <AppShell.Main
+        bg="gray.1"
+        pl={{ base: '20', xs: '40', sm: '370' }}
+        pt={{ base: '80', sm: '40' }}
+      >
         {children}
       </AppShell.Main>
     </AppShell>
