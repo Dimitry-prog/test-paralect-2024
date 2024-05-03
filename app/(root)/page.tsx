@@ -1,5 +1,9 @@
-import { Button } from '@mantine/core';
+import MoviesList from '@/widgets/movies-list';
 
 export default function Home() {
-  return <Button size="sm">Search</Button>;
+  return (
+    <>
+      <MoviesList />
+    </>
+  );
 }

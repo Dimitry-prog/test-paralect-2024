@@ -98,16 +98,4 @@ export const myTheme = createTheme({
     lg: rem(18),
     xl: rem(20),
   },
-  components: {
-    NavLinks: {
-      defaultProps: {
-        '&:hover': {
-          backgroundColor: 'red',
-        },
-        '.mantine-NavLink-root': {
-          backgroundColor: 'red',
-        },
-      },
-    },
-  },
 });
