@@ -22,7 +22,7 @@ const CustomLayout = ({ children }: { children: ReactNode }) => {
       withBorder={false}
     >
       <AppShell.Header bg="purple.1">
-        <Group p="md">
+        <Group p="md" display={{ base: 'flex', sm: 'none' }}>
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Logo />
         </Group>
@@ -42,6 +42,7 @@ const CustomLayout = ({ children }: { children: ReactNode }) => {
         bg="gray.1"
         pl={{ base: '20', xs: '40', sm: '370' }}
         pt={{ base: '80', sm: '40' }}
+        pr={20}
       >
         {children}
       </AppShell.Main>

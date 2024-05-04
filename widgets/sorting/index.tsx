@@ -14,6 +14,10 @@ const Sorting = () => {
           fontWeight: 700,
           color: theme.colors.black[9],
         },
+        input: {
+          borderColor: theme.colors.gray[2],
+          borderRadius: '8px',
+        },
       })}
     />
   );

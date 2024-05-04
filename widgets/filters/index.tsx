@@ -15,6 +15,10 @@ const Filters = () => {
             fontWeight: 700,
             color: theme.colors.black[9],
           },
+          input: {
+            borderColor: theme.colors.gray[2],
+            borderRadius: '8px',
+          },
         })}
       />
       <Select
@@ -26,6 +30,10 @@ const Filters = () => {
             paddingBottom: '8px',
             fontWeight: 700,
             color: theme.colors.black[9],
+          },
+          input: {
+            borderColor: theme.colors.gray[2],
+            borderRadius: '8px',
           },
         })}
       />
@@ -40,9 +48,27 @@ const Filters = () => {
               fontWeight: 700,
               color: theme.colors.black[9],
             },
+            input: {
+              borderColor: theme.colors.gray[2],
+              borderRadius: '8px',
+            },
           })}
         />
-        <Select w={137} placeholder="To" />
+        <Select
+          w={137}
+          placeholder="To"
+          styles={(theme) => ({
+            label: {
+              paddingBottom: '8px',
+              fontWeight: 700,
+              color: theme.colors.black[9],
+            },
+            input: {
+              borderColor: theme.colors.gray[2],
+              borderRadius: '8px',
+            },
+          })}
+        />
       </Group>
 
       <Button p={0} bg="transparent" c="gray.6">

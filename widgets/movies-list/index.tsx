@@ -1,3 +1,5 @@
+'use client';
+
 import { List, ListItem } from '@mantine/core';
 
 import MovieCard from '@/widgets/movie-card';
@@ -12,6 +14,11 @@ const MoviesList = () => {
         flexWrap: 'wrap',
         gap: '16px',
       }}
+      styles={(theme) => ({
+        itemLabel: {
+          width: '100%',
+        },
+      })}
     >
       {Array.from({ length: 12 }).map((item, index) => (
         <ListItem key={index} m={0}>

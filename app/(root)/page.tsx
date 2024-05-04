@@ -6,8 +6,8 @@ import Sorting from '@/widgets/sorting';
 
 export default function Home() {
   return (
-    <Stack w={980}>
-      <Title mb={40}>Movies</Title>
+    <Stack maw={980} gap={40}>
+      <Title>Movies</Title>
       <Stack gap={24} align="flex-end">
         <Filters />
         <Sorting />
