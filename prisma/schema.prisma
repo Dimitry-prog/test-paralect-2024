@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  username String
+
+  movies Movie[]
+}
+
+model Movie {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  image        String
+  year         DateTime
+  voteAverange String
+  voteCount    String
+  trailer      String
+  budget       String
+  releaseDate  DateTime
+  revenue      String
+  duration     String
+  userVote     String?
+
+  genres    Genre[]
+  companies Company[]
+
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @db.ObjectId
+}
+
+model Genre {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+
+  movie   Movie?  @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  movieId String? @db.ObjectId
+}
+
+model Company {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  image String
+  title String
+
+  movie   Movie?  @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  movieId String? @db.ObjectId
+}
