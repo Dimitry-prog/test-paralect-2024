@@ -18,7 +18,8 @@ model User {
   email    String @unique
   username String
 
-  movies Movie[]
+  movies    Movie[]  @relation(fields: [moviesIds], references: [id])
+  moviesIds String[] @db.ObjectId
 }
 
 model Movie {
@@ -36,19 +37,20 @@ model Movie {
   duration     String
   userVote     String?
 
-  genres    Genre[]
-  companies Company[]
-
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String? @db.ObjectId
+  genres       Genre[]   @relation(fields: [genresIds], references: [id])
+  genresIds    String[]  @db.ObjectId
+  companies    Company[] @relation(fields: [companiesIds], references: [id])
+  companiesIds String[]  @db.ObjectId
+  users        User[]    @relation(fields: [usersIds], references: [id])
+  usersIds     String[]  @db.ObjectId
 }
 
 model Genre {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   title String
 
-  movie   Movie?  @relation(fields: [movieId], references: [id], onDelete: Cascade)
-  movieId String? @db.ObjectId
+  movies   Movie[]  @relation(fields: [movieIds], references: [id])
+  movieIds String[] @db.ObjectId
 }
 
 model Company {
@@ -56,6 +58,6 @@ model Company {
   image String
   title String
 
-  movie   Movie?  @relation(fields: [movieId], references: [id], onDelete: Cascade)
-  movieId String? @db.ObjectId
+  movies   Movie[]  @relation(fields: [movieIds], references: [id])
+  movieIds String[] @db.ObjectId
 }
