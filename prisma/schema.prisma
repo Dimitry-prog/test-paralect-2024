@@ -18,8 +18,7 @@ model User {
   email    String @unique
   username String
 
-  movies    Movie[]  @relation(fields: [moviesIds], references: [id])
-  moviesIds String[] @db.ObjectId
+  votes Vote[]
 }
 
 model Movie {
@@ -27,7 +26,6 @@ model Movie {
   title        String
   description  String
   image        String
-  year         DateTime
   voteAverange String
   voteCount    String
   trailer      String
@@ -35,14 +33,13 @@ model Movie {
   releaseDate  DateTime
   revenue      String
   duration     String
-  userVote     String?
+
+  votes Vote[]
 
   genres       Genre[]   @relation(fields: [genresIds], references: [id])
   genresIds    String[]  @db.ObjectId
   companies    Company[] @relation(fields: [companiesIds], references: [id])
   companiesIds String[]  @db.ObjectId
-  users        User[]    @relation(fields: [usersIds], references: [id])
-  usersIds     String[]  @db.ObjectId
 }
 
 model Genre {
@@ -54,10 +51,20 @@ model Genre {
 }
 
 model Company {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  image String
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  image String?
   title String
 
   movies   Movie[]  @relation(fields: [movieIds], references: [id])
   movieIds String[] @db.ObjectId
+}
+
+model Vote {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  score String
+
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String @db.ObjectId
+  movie   Movie  @relation(fields: [movieId], references: [id])
+  movieId String @db.ObjectId
 }
