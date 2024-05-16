@@ -3,8 +3,13 @@
 import { List, ListItem } from '@mantine/core';
 
 import MovieCard from '@/widgets/movie-card';
+import { MovieType } from '@/widgets/movie-card/types';
 
-const MoviesList = () => {
+type MoviesListProps = {
+  movies: MovieType[];
+};
+
+const MoviesList = ({ movies }: MoviesListProps) => {
   return (
     <List
       listStyleType="none"
@@ -20,9 +25,9 @@ const MoviesList = () => {
         },
       })}
     >
-      {Array.from({ length: 12 }).map((item, index) => (
-        <ListItem key={index} m={0}>
-          <MovieCard />
+      {movies.map((movie) => (
+        <ListItem key={movie.id} m={0}>
+          <MovieCard movie={movie} />
         </ListItem>
       ))}
     </List>

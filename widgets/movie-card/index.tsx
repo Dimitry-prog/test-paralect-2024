@@ -18,16 +18,23 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import NextImage from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import StarIcon from '@/shared/components/icons/star-icon';
+import { currentUserId } from '@/shared/libs/constants';
+import { formattedDate, formattedDuration, formattedPrice } from '@/shared/libs/utils';
+import { MovieType } from '@/widgets/movie-card/types';
 
-const MovieCard = () => {
+type MovieCardProps = {
+  movie: MovieType;
+};
+
+const MovieCard = ({ movie }: MovieCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const theme = useMantineTheme();
   const pathname = usePathname();
+  const myFavorite = movie.votes.find((vote) => vote.userId === currentUserId);
 
   return (
     <>
@@ -42,7 +49,7 @@ const MovieCard = () => {
           <Modal.Body pt={16}>
             <Stack gap={16}>
               <Text fw={700} c="black.9">
-                Coco
+                {movie.title}
               </Text>
 
               <Rating
@@ -71,25 +78,25 @@ const MovieCard = () => {
           align="start"
           justify="space-between"
         >
-          {pathname === '/' ? (
+          {pathname === '/' || pathname.includes('rated') ? (
             <NavLink
               component={Link}
-              href="/12"
+              href={movie.id}
               p={0}
               w="fit-content"
+              bg="transparent"
               label={
                 <Flex gap={16} direction={{ base: 'column', sm: 'row' }}>
                   <Image
-                    component={NextImage}
                     w={{ base: '100%', sm: '119' }}
                     fit="cover"
                     width={119}
                     height={170}
-                    src="/film.png"
-                    alt="film"
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.image}`}
+                    alt={movie.title}
                   />
 
-                  <Stack gap={62}>
+                  <Stack justify="space-between">
                     <Stack gap={8}>
                       <Title
                         order={2}
@@ -98,24 +105,24 @@ const MovieCard = () => {
                           color: theme.colors.purple[6],
                         }}
                       >
-                        The Green Mile
+                        {movie.title}
                       </Title>
-                      <Text c="gray.6">1999</Text>
+                      <Text c="gray.6">{formattedDate(movie.releaseDate).split(',')[1]}</Text>
                       <Group gap={8}>
                         <Group gap={4}>
                           <StarIcon fill={theme.colors.yellow[0]} />
                           <Text c="black.9" fw={600}>
-                            9.3
+                            {movie.voteAverange}
                           </Text>
                         </Group>
-                        <Text c="gray.6">(2.9M)</Text>
+                        <Text c="gray.6">({movie.voteCount})</Text>
                       </Group>
                     </Stack>
 
-                    <Group gap={8}>
+                    <Group gap={8} wrap="nowrap">
                       <Text c="gray.6">Genres</Text>
-                      <Text c="black.9" fw={400}>
-                        Drama, Crime, Fantasy
+                      <Text c="black.9" fw={400} lineClamp={1}>
+                        {movie.genres.map((genre) => genre.title).join(', ')}
                       </Text>
                     </Group>
                   </Stack>
@@ -125,14 +132,13 @@ const MovieCard = () => {
           ) : (
             <Flex gap={16} direction={{ base: 'column', sm: 'row' }}>
               <Image
-                component={NextImage}
                 w={{ base: '100%', sm: '250' }}
                 h={{ base: '100%', sm: '350' }}
                 fit="cover"
                 width={250}
                 height={350}
-                src="/film.png"
-                alt="film"
+                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.image}`}
+                alt={movie.title}
               />
 
               <Stack gap={62} justify="space-between">
@@ -144,17 +150,17 @@ const MovieCard = () => {
                       color: theme.colors.purple[6],
                     }}
                   >
-                    The Green Mile
+                    {movie.title}
                   </Title>
-                  <Text c="gray.6">1999</Text>
+                  <Text c="gray.6">{formattedDate(movie.releaseDate).split(',')[1]}</Text>
                   <Group gap={8}>
                     <Group gap={4}>
                       <StarIcon fill={theme.colors.yellow[0]} />
                       <Text c="black.9" fw={600}>
-                        9.3
+                        {movie.voteAverange}
                       </Text>
                     </Group>
-                    <Text c="gray.6">(2.9M)</Text>
+                    <Text c="gray.6">({movie.voteCount})</Text>
                   </Group>
                 </Stack>
 
@@ -166,7 +172,7 @@ const MovieCard = () => {
                   </GridCol>
                   <GridCol span={8}>
                     <Text c="black.9" fw={400}>
-                      Drama, Crime, Fantasy
+                      {formattedDuration(movie.duration)}
                     </Text>
                   </GridCol>
 
@@ -175,7 +181,7 @@ const MovieCard = () => {
                   </GridCol>
                   <GridCol span={8}>
                     <Text c="black.9" fw={400}>
-                      Drama, Crime, Fantasy
+                      {formattedDate(movie.releaseDate)}
                     </Text>
                   </GridCol>
                   <GridCol span={4}>
@@ -183,7 +189,7 @@ const MovieCard = () => {
                   </GridCol>
                   <GridCol span={8}>
                     <Text c="black.9" fw={400}>
-                      Drama, Crime, Fantasy
+                      {formattedPrice(movie.budget)}
                     </Text>
                   </GridCol>
                   <GridCol span={4}>
@@ -191,7 +197,7 @@ const MovieCard = () => {
                   </GridCol>
                   <GridCol span={8}>
                     <Text c="black.9" fw={400}>
-                      Drama, Crime, Fantasy
+                      {formattedPrice(movie.revenue)}
                     </Text>
                   </GridCol>
                   <GridCol span={4}>
@@ -199,7 +205,7 @@ const MovieCard = () => {
                   </GridCol>
                   <GridCol span={8}>
                     <Text c="black.9" fw={400}>
-                      Drama, Crime, Fantasy
+                      {movie.genres.map((genre) => genre.title).join(', ')}
                     </Text>
                   </GridCol>
                 </Grid>
@@ -209,11 +215,13 @@ const MovieCard = () => {
 
           <Group gap={4} wrap="nowrap">
             <Button onClick={open} w="fit-content" p={0} bg="transparent">
-              <StarIcon fill={theme.colors.gray[3]} />
+              <StarIcon fill={myFavorite ? theme.colors.purple[6] : theme.colors.gray[3]} />
             </Button>
-            <Text fw={600} c="black.0">
-              9
-            </Text>
+            {myFavorite && (
+              <Text fw={600} c="black.0">
+                {myFavorite.score}
+              </Text>
+            )}
           </Group>
         </Flex>
       </Card>

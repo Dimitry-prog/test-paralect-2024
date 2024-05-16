@@ -332,3 +332,5 @@ export const moviesMock = [
     duration: '177',
   },
 ];
+
+export const currentUserId = '6646326912012c586783a572';
