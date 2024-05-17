@@ -71,7 +71,11 @@ const MovieCard = ({ movie }: MovieCardProps) => {
         </Modal.Content>
       </Modal.Root>
 
-      <Card p={24} radius={12} w={{ base: '100%', sm: pathname === '/' ? '482' : '100%' }}>
+      <Card
+        p={24}
+        radius={12}
+        w={{ base: '100%', sm: pathname === '/' || pathname.includes('rated') ? '482' : '100%' }}
+      >
         <Flex
           direction={{ base: 'column', sm: 'row' }}
           gap={8}
