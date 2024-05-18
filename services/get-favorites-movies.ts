@@ -19,6 +19,11 @@ export const getFavoritesMovies = async ({
           contains: query,
           mode: 'insensitive',
         },
+        votes: {
+          some: {
+            userId: currentUserId,
+          },
+        },
       },
     });
     const movies = await prisma.movie.findMany({

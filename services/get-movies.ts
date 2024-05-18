@@ -29,13 +29,6 @@ export const getMovies = async ({
                 id: genre,
               },
             },
-            NOT: {
-              genres: {
-                some: {
-                  id: genre,
-                },
-              },
-            },
           },
         ],
         releaseDate: year

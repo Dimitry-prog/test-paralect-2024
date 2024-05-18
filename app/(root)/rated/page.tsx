@@ -1,9 +1,11 @@
-import { Group, Pagination, Stack, Title } from '@mantine/core';
+import { Group, Stack, Title } from '@mantine/core';
 
+import RatedEmpty from '@/app/(root)/rated/_components/rated-empty';
 import { getFavoritesMovies } from '@/services/get-favorites-movies';
 import Search from '@/shared/components/search';
 import { SearchParamsType } from '@/shared/types';
 import MoviesList from '@/widgets/movies-list';
+import MyPagination from '@/widgets/pagination';
 
 const RatedPage = async ({ searchParams }: SearchParamsType) => {
   const query = searchParams.query || '';
@@ -17,8 +19,15 @@ const RatedPage = async ({ searchParams }: SearchParamsType) => {
         <Search />
       </Group>
       <Stack gap={24} align="center">
-        <MoviesList movies={movies?.data || []} />
-        <Pagination total={10} />
+        {movies?.data && movies.data.length > 0 ? (
+          <MoviesList movies={movies.data} />
+        ) : (
+          <RatedEmpty />
+        )}
+
+        {movies?.totalPages && movies.totalPages > 1 && (
+          <MyPagination totalPages={movies.totalPages} page={page} />
+        )}
       </Stack>
     </Stack>
   );
