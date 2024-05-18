@@ -1,24 +1,26 @@
 'use client';
 
-import { Select } from '@mantine/core';
+import MySelect from '@/shared/components/ui/select';
+import { useFilters } from '@/widgets/filters/hooks/use-filters';
 
-const Sorting = () => {
+type SortingProps = {
+  data:
+    | {
+        value: string;
+        label: string;
+      }[]
+    | string[];
+};
+
+const Sorting = ({ data }: SortingProps) => {
+  const { onChange } = useFilters();
+
   return (
-    <Select
-      w={283}
+    <MySelect
       label="Sort by"
       placeholder="Select sorting"
-      styles={(theme) => ({
-        label: {
-          paddingBottom: '8px',
-          fontWeight: 700,
-          color: theme.colors.black[9],
-        },
-        input: {
-          borderColor: theme.colors.gray[2],
-          borderRadius: '8px',
-        },
-      })}
+      onChange={(value) => onChange(value, 'sort')}
+      data={data}
     />
   );
 };

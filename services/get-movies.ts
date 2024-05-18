@@ -7,6 +7,7 @@ export const getMovies = async ({
   year,
   ratingFrom,
   ratingTo,
+  sort,
   page,
   limit = 3,
 }: {
@@ -14,6 +15,7 @@ export const getMovies = async ({
   year: string;
   ratingFrom: string;
   ratingTo: string;
+  sort: string;
   page: number;
   limit?: number;
 }) => {
@@ -78,6 +80,11 @@ export const getMovies = async ({
       },
       take: limit,
       skip: limit * (page - 1),
+      orderBy: sort
+        ? {
+            [sort]: 'desc',
+          }
+        : undefined,
     });
 
     return {

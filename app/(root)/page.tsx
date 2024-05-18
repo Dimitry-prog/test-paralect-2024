@@ -13,17 +13,37 @@ export default async function Home({ searchParams }: SearchParamsType) {
   const year = searchParams.year;
   const ratingFrom = searchParams.ratingFrom;
   const ratingTo = searchParams.ratingTo;
+  const sort = searchParams.sort;
   const page = parseInt(searchParams.page || '1');
   const movies = await getMovies({
     genre: genre!,
     year: year!,
     ratingFrom: ratingFrom!,
     ratingTo: ratingTo!,
+    sort: sort!,
     page,
   });
   const genres = await getGenres();
 
   const filteredGenres = genres?.map((genre) => ({ value: genre.id, label: genre.title }));
+  const sortingData = [
+    {
+      value: 'releaseDate',
+      label: 'Date',
+    },
+    {
+      value: 'budget',
+      label: 'Budget',
+    },
+    {
+      value: 'revenue',
+      label: 'Revenue',
+    },
+    {
+      value: 'duration',
+      label: 'Duration',
+    },
+  ];
 
   return (
     <Stack maw={980} gap={40}>
@@ -31,7 +51,7 @@ export default async function Home({ searchParams }: SearchParamsType) {
       <Stack gap={24}>
         <Stack gap={24} align="flex-end">
           <Filters genres={filteredGenres || []} />
-          <Sorting />
+          <Sorting data={sortingData} />
         </Stack>
         {movies && movies.data.length > 0 ? (
           <MoviesList movies={movies.data} />
