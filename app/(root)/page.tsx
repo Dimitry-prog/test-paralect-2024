@@ -1,23 +1,43 @@
 import { Pagination, Stack, Title } from '@mantine/core';
 
 import EmptyFiltersResult from '@/app/(root)/_components/empty-filters-result';
+import { getGenres } from '@/services/get-genres';
 import { getMovies } from '@/services/get-movies';
+import { SearchParamsType } from '@/shared/types';
 import Filters from '@/widgets/filters';
 import MoviesList from '@/widgets/movies-list';
 import Sorting from '@/widgets/sorting';
 
-export default async function Home() {
-  const movies = await getMovies();
+export default async function Home({ searchParams }: SearchParamsType) {
+  const genre = searchParams.genre;
+  const year = searchParams.year;
+  const ratingFrom = searchParams.ratingFrom;
+  const ratingTo = searchParams.ratingTo;
+  const page = parseInt(searchParams.page || '1');
+  const movies = await getMovies({
+    genre: genre!,
+    year: year!,
+    ratingFrom: ratingFrom!,
+    ratingTo: ratingTo!,
+    page,
+  });
+  const genres = await getGenres();
+
+  const filteredGenres = genres?.map((genre) => ({ value: genre.id, label: genre.title }));
 
   return (
     <Stack maw={980} gap={40}>
       <Title>Movies</Title>
       <Stack gap={24}>
         <Stack gap={24} align="flex-end">
-          <Filters />
+          <Filters genres={filteredGenres || []} />
           <Sorting />
         </Stack>
-        {movies && movies.length > 0 ? <MoviesList movies={movies} /> : <EmptyFiltersResult />}
+        {movies && movies.data.length > 0 ? (
+          <MoviesList movies={movies.data} />
+        ) : (
+          <EmptyFiltersResult />
+        )}
         <Stack align="flex-end">
           <Pagination total={10} />
         </Stack>
