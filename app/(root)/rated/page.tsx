@@ -10,6 +10,7 @@ import MyPagination from '@/widgets/pagination';
 const RatedPage = async ({ searchParams }: SearchParamsType) => {
   const query = searchParams.query || '';
   const page = parseInt(searchParams.page || '1');
+
   const movies = await getFavoritesMovies({ query, page });
 
   return (

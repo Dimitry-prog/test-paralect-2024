@@ -1,6 +1,6 @@
 import { Stack, Title } from '@mantine/core';
 
-import EmptyFiltersResult from '@/app/(root)/_components/empty-filters-result';
+import EmptyFiltersResult from '@/app/(root)/movies/_components/empty-filters-result';
 import { getGenres } from '@/services/get-genres';
 import { getMovies } from '@/services/get-movies';
 import { SearchParamsType } from '@/shared/types';

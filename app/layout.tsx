@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 
+import CustomLayout from '@/shared/components/custom-layout';
 import { myTheme } from '@/shared/theme';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -29,7 +30,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <MantineProvider theme={myTheme}>
           <Notifications />
-          {children}
+          <CustomLayout>{children}</CustomLayout>
         </MantineProvider>
       </body>
     </html>
