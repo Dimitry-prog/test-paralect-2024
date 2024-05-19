@@ -1,6 +1,6 @@
 export const navMenuItems = [
   {
-    href: '/',
+    href: '/movies',
     label: 'Movies',
   },
   {

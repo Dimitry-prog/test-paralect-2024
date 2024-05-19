@@ -28,7 +28,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   } = useOptimisticFavorite({
     movie,
   });
-
+  console.log(pathname);
   return (
     <>
       <ModalRating
@@ -43,7 +43,10 @@ const MovieCard = ({ movie }: MovieCardProps) => {
       <Card
         p={24}
         radius={12}
-        w={{ base: '100%', sm: pathname === '/' || pathname.includes('rated') ? '482' : '100%' }}
+        w={{
+          base: '100%',
+          sm: pathname === '/movies' || pathname.includes('rated') ? '482' : '100%',
+        }}
       >
         <Flex
           direction={{ base: 'column', sm: 'row' }}
@@ -51,7 +54,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
           align="start"
           justify="space-between"
         >
-          {pathname === '/' || pathname.includes('rated') ? (
+          {pathname === '/movies' || pathname.includes('rated') ? (
             <MovieCardWithLink movie={movie} />
           ) : (
             <MovieCardFullInfo movie={movie} />

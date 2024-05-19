@@ -17,7 +17,7 @@ const MovieCardWithLink = ({ movie }: MovieCardWithLinkProps) => {
   return (
     <NavLink
       component={Link}
-      href={movie.id}
+      href={`/movies/${movie.id}`}
       p={0}
       w="fit-content"
       bg="transparent"

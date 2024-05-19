@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation';
 
 import { navMenuItems } from '@/shared/components/nav-menu/nav-links';
 
+import styles from './styles.module.css';
+
 const NavMenu = () => {
   const pathname = usePathname();
 
@@ -17,16 +19,17 @@ const NavMenu = () => {
           label={link.label}
           styles={(theme) => ({
             root: {
-              backgroundColor: pathname === link.href ? theme.colors.purple[2] : '',
+              backgroundColor: pathname.includes(link.href) ? theme.colors.purple[2] : '',
               borderRadius: '8px',
             },
             body: {
               fontSizes: '16px',
-              fontWeight: pathname === link.href ? 700 : 400,
+              fontWeight: pathname.includes(link.href) ? 700 : 400,
               lineHeights: '22.4px',
-              color: pathname === link.href ? theme.colors.purple[6] : theme.colors.black[10],
+              color: pathname.includes(link.href) ? theme.colors.purple[6] : theme.colors.black[10],
             },
           })}
+          className={styles.hover}
         />
       ))}
     </Stack>
