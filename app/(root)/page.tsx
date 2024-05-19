@@ -60,11 +60,11 @@ export default async function Home({ searchParams }: SearchParamsType) {
           <EmptyFiltersResult />
         )}
 
-        {movies?.totalPages && movies.totalPages > 1 && (
+        {movies?.totalPages && movies.totalPages > 1 ? (
           <Stack align="flex-end">
             <MyPagination totalPages={movies.totalPages} page={page} />
           </Stack>
-        )}
+        ) : null}
       </Stack>
     </Stack>
   );

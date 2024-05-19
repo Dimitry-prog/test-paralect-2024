@@ -25,9 +25,9 @@ const RatedPage = async ({ searchParams }: SearchParamsType) => {
           <RatedEmpty />
         )}
 
-        {movies?.totalPages && movies.totalPages > 1 && (
+        {movies?.totalPages && movies.totalPages > 1 ? (
           <MyPagination totalPages={movies.totalPages} page={page} />
-        )}
+        ) : null}
       </Stack>
     </Stack>
   );
