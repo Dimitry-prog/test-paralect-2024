@@ -9,6 +9,12 @@ import MoviesList from '@/widgets/movies-list';
 import MyPagination from '@/widgets/pagination';
 import Sorting from '@/widgets/sorting';
 
+export const generateMetadata = () => {
+  return {
+    title: 'Movies',
+  };
+};
+
 export default async function Home({ searchParams }: SearchParamsType) {
   const genre = searchParams.genre;
   const year = searchParams.year;

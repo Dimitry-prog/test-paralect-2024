@@ -7,6 +7,12 @@ import MoviesList from '@/widgets/movies-list';
 import MyPagination from '@/widgets/pagination';
 import Search from '@/widgets/search';
 
+export const generateMetadata = () => {
+  return {
+    title: 'Favorite movies',
+  };
+};
+
 const RatedPage = async ({ searchParams }: SearchParamsType) => {
   const query = searchParams.query || '';
   const page = parseInt(searchParams.page || '1');

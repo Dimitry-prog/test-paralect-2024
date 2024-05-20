@@ -8,15 +8,15 @@ export const getMovies = async ({
   ratingFrom,
   ratingTo,
   sort,
-  page,
+  page = 1,
   limit = 3,
 }: {
-  genre: string;
-  year: string;
-  ratingFrom: string;
-  ratingTo: string;
-  sort: string;
-  page: number;
+  genre?: string;
+  year?: string;
+  ratingFrom?: string;
+  ratingTo?: string;
+  sort?: string;
+  page?: number;
   limit?: number;
 }) => {
   try {
