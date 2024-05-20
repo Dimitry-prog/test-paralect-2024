@@ -2,10 +2,10 @@ import { Group, Stack, Title } from '@mantine/core';
 
 import RatedEmpty from '@/app/(root)/rated/_components/rated-empty';
 import { getFavoritesMovies } from '@/services/get-favorites-movies';
-import Search from '@/shared/components/search';
 import { SearchParamsType } from '@/shared/types';
 import MoviesList from '@/widgets/movies-list';
 import MyPagination from '@/widgets/pagination';
+import Search from '@/widgets/search';
 
 const RatedPage = async ({ searchParams }: SearchParamsType) => {
   const query = searchParams.query || '';

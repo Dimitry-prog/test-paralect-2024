@@ -28,7 +28,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   } = useOptimisticFavorite({
     movie,
   });
-  console.log(pathname);
+
   return (
     <>
       <ModalRating

@@ -68,7 +68,11 @@ const MovieIdCard = async ({ movieId }: MovieIdCardProps) => {
                   fit="cover"
                   width={40}
                   height={40}
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${company.image}`}
+                  src={
+                    company.image
+                      ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${company.image}`
+                      : '/no_img.png'
+                  }
                   alt={company.title}
                   radius={50}
                 />

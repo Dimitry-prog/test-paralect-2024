@@ -28,7 +28,7 @@ const MovieCardWithLink = ({ movie }: MovieCardWithLinkProps) => {
             fit="cover"
             width={119}
             height={170}
-            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.image}`}
+            src={movie.image ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.image}` : '/no_img.png'}
             alt={movie.title}
           />
 

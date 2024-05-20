@@ -29,7 +29,7 @@ const MovieCardFullInfo = ({ movie }: MovieCardFullInfoProps) => {
         fit="cover"
         width={250}
         height={350}
-        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.image}`}
+        src={movie.image ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.image}` : '/no_img.png'}
         alt={movie.title}
       />
 
